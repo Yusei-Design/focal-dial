@@ -147,7 +147,7 @@ body {
   padding-bottom: 10px;
   
   /* 元の余白デザインを維持 */
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   
   scrollbar-width: none;
   -ms-overflow-style: none;
