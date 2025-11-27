@@ -1,22 +1,59 @@
-/* 全体の設定 */
+/* 全体の設定 (背景・中央揃え) */
 body {
-  width: 320px;
-  height: auto;
-  min-height: 400px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; /* 画面の高さいっぱい */
   
-  /* 上下48px, 左右24px */
-  padding: 48px 24px;
-  box-sizing: border-box;
+  /* PCで見るときの背景色（少し明るいグレーにして本体を目立たせる） */
+  background-color: #1a1a1a; 
+  
+  /* ど真ん中に配置する設定 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  background-color: #000;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "BIZ UDPGothic", sans-serif;
+}
+
+/* スマホ本体のような箱 */
+.container {
+  width: 100%;
+  max-width: 400px; /* PCでもこれ以上広がらない */
+  background-color: #000; /* 本体の黒 */
+  
+  /* 元のpadding設定をここに移動 */
+  padding: 48px 24px;
+  box-sizing: border-box;
   
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0;
+  
+  /* PC向け：角丸と影をつけて「浮いている」ように見せる */
+  border-radius: 40px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
+
+/* スマホで見た時の調整 */
+@media screen and (max-width: 480px) {
+  /* スマホでは角丸や余白をなくして全画面にする */
+  .container {
+    max-width: 100%;
+    height: 100vh; /* 縦いっぱい */
+    border-radius: 0;
+    box-shadow: none;
+    /* 上下のパディングを少し調整して見やすく */
+    padding: 60px 24px 40px 24px; 
+    justify-content: space-between; /* 上下に分散 */
+  }
+  body {
+    background-color: #000; /* 背景も黒に */
+  }
+}
+
+/* --- 以下、パーツのデザイン（変更なし） --- */
 
 /* 1. 情報バー */
 .top-display {
@@ -24,10 +61,7 @@ body {
   justify-content: space-between;
   align-items: flex-end; 
   width: 100%;
-  
-  /* ギャップ 48px */
   margin-bottom: 48px;
-  
   line-height: 1;
 }
 
@@ -51,8 +85,6 @@ body {
   display: flex;
   align-items: flex-end; 
   width: 100%;
-  
-  /* ギャップ 48px */
   margin-bottom: 48px;
 }
 
@@ -97,8 +129,7 @@ body {
   white-space: nowrap;
   padding-bottom: 10px;
   
-  /* 指定変更: ギャップ 16px (下のボタンとの間) */
-  margin-bottom: 6px;
+  margin-bottom: 16px;
   
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -137,7 +168,6 @@ body {
 /* 4. センサーサイズ選択ボタン */
 .sensor-select { 
   display: flex; gap: 10px; width: 100%; 
-  /* 下の余白はbodyのpadding-bottom (48px) が担当 */
 }
 
 .sensor-btn {
