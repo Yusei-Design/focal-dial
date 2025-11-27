@@ -1,0 +1,152 @@
+/* 全体の設定 */
+body {
+  width: 320px;
+  height: auto;
+  min-height: 400px;
+  
+  /* 上下48px, 左右24px */
+  padding: 48px 24px;
+  box-sizing: border-box;
+
+  background-color: #000;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "BIZ UDPGothic", sans-serif;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* 1. 情報バー */
+.top-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; 
+  width: 100%;
+  
+  /* ギャップ 48px */
+  margin-bottom: 48px;
+  
+  line-height: 1;
+}
+
+.main-value { display: flex; align-items: baseline; }
+.focal-length { 
+  font-size: 50px; font-weight: 500; color: #fff; 
+  font-feature-settings: "tnum"; margin: 0; padding: 0; line-height: 1;
+}
+.unit-small { font-size: 24px; font-weight: normal; color: #fff; margin-left: 4px; }
+
+.sub-value {
+  text-align: right; font-size: 16px; line-height: 24px;
+  font-weight: 500; margin: 0; padding: 0; padding-bottom: 2px;
+}
+#sensorNameDisplay { color: #fff; }
+#lensValueDisplay { color: #fff; }
+
+
+/* 2. ダイヤル部分 */
+.dial-spacer {
+  display: flex;
+  align-items: flex-end; 
+  width: 100%;
+  
+  /* ギャップ 48px */
+  margin-bottom: 48px;
+}
+
+.dial-container {
+  width: 100%; position: relative; height: 70px;
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+.center-indicator {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 6px solid transparent; border-right: 6px solid transparent;
+  border-bottom: 8px solid #fff; z-index: 10;
+}
+.ruler-scroll {
+  display: flex; overflow-x: scroll; overflow-y: hidden;
+  height: 100%; width: 100%; padding: 0 calc(50% - 4px);
+  box-sizing: border-box; scroll-behavior: smooth;
+  scrollbar-width: none; align-items: flex-end;
+}
+.ruler-scroll::-webkit-scrollbar { display: none; }
+.tick-wrapper {
+  flex: 0 0 8px; height: 100%; display: flex; flex-direction: column;
+  justify-content: flex-end; align-items: center; position: relative;
+  padding-bottom: 10px; 
+}
+.tick { width: 1px; background-color: #666; border-radius: 1px; }
+.tick.major { height: 24px; background-color: #fff; width: 2px; }
+.tick.medium { height: 16px; background-color: #aaa; }
+.tick.minor { height: 8px; }
+.tick-label { 
+  position: absolute; top: 10px; font-size: 14px; color: #fff; font-weight: 500; 
+  transform: translateX(-50%); left: 50%; 
+}
+
+
+/* 3. 焦点距離テンプレートカールセル */
+.preset-bar {
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  overflow-x: scroll;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  
+  /* 指定変更: ギャップ 16px (下のボタンとの間) */
+  margin-bottom: 6px;
+  
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+.preset-bar::-webkit-scrollbar { display: none; }
+
+.preset-container {
+  display: inline-flex;
+  padding: 0 24px; 
+  gap: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.preset-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.preset-chip:hover { background: rgba(255, 255, 255, 0.3); color: #fff; }
+.preset-chip.active { background: #fff; color: #000; font-weight: bold; cursor: default; }
+
+
+/* 4. センサーサイズ選択ボタン */
+.sensor-select { 
+  display: flex; gap: 10px; width: 100%; 
+  /* 下の余白はbodyのpadding-bottom (48px) が担当 */
+}
+
+.sensor-btn {
+  height: 32px; flex: 1; font-size: 10px; font-weight: 500;
+  border-radius: 16px; border: none; cursor: pointer; font-family: inherit;
+  transition: background 0.2s, color 0.2s; background: #8E8E93; color: #fff;
+}
+.sensor-btn.active { background: #FFFFFF; color: #000000; }
+
+/* アニメーション用 */
+.char-anim { opacity: 0; animation: floatUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display: inline-block; transform: translateY(5px); }
+@keyframes floatUp { to { opacity: 1; transform: translateY(0); } }

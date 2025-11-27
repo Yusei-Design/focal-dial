@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Focal Dial</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="top-display">
+    <div class="main-value">
+      <div class="focal-length" id="displayVal">50<span class="unit-small">mm</span></div>
+    </div>
+    <div class="sub-value">
+      <div id="sensorNameDisplay">APS-C</div>
+      <div id="lensValueDisplay">33mm</div>
+    </div>
+  </div>
+
+  <div class="dial-spacer">
+    <div class="dial-container">
+      <div class="center-indicator"></div>
+      <div class="ruler-scroll" id="ruler">
+        </div>
+    </div>
+  </div>
+
+  <div class="preset-bar">
+    <div class="preset-container" id="presetContainer">
+      </div>
+  </div>
+
+  <div class="sensor-select">
+    <button class="sensor-btn" data-crop="0.79">Large</button>
+    <button class="sensor-btn" data-crop="1.0">Full Frame</button>
+    <button class="sensor-btn active" data-crop="1.5">APS-C</button>
+    <button class="sensor-btn" data-crop="2.0">MFT</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
