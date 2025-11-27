@@ -3,10 +3,12 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh; /* 画面の高さいっぱい */
   
-  /* PCでの背景色 */
-  background-color: #1a1a1a; 
+  /* 画面の高さいっぱい確保し、その中央に配置する */
+  min-height: 100vh;
+  
+  /* PC/スマホ共通：背景色 */
+  background-color: #000; 
   
   /* ど真ん中に配置 */
   display: flex;
@@ -16,17 +18,19 @@ body {
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "BIZ UDPGothic", sans-serif;
   
-  /* スマホでのタップハイライトを消す */
   -webkit-tap-highlight-color: transparent;
 }
 
 /* 1. コンテナ（本体） */
 .container {
   width: 100%;
-  max-width: 375px; /* PCではスマホサイズで止める */
+  
+  /* スマホでも横幅いっぱいにならず、適切なサイズで止める */
+  max-width: 360px; 
+  
   background-color: #000;
   
-  /* PCでのパディング */
+  /* 余白設定（PC/スマホ共通） */
   padding: 48px 24px;
   box-sizing: border-box;
   
@@ -34,49 +38,41 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   
-  /* PCでの見た目：角丸と影 */
-  border-radius: 40px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  /* 内容量に合わせて高さを決める（引き伸ばさない） */
+  height: auto; 
 }
 
-/* ========= スマホ対応の重要設定 ========= */
+
+/* ========= スマホ調整（引き伸ばさず、中央配置を維持） ========= */
 @media screen and (max-width: 480px) {
   body {
-    background-color: #000; /* 背景を黒に */
+    /* スマホでアドレスバーなどが出ても中央を維持 */
+    min-height: 100dvh; 
   }
   
   .container {
-    max-width: 100%;
-    /* 画面の高さいっぱいに広げる */
-    height: 100vh; 
-    /* Dynamic Viewport Height (新しいスマホ用単位) */
-    height: 100dvh; 
+    /* 画面端に張り付かないように少し余裕を持たせるかもお好みですが、
+       今回は黒背景なので馴染みます */
+    width: 100%;
     
-    border-radius: 0;
-    box-shadow: none;
-    
-    /* 上下に分散させず、中央に寄せる */
-    justify-content: center;
-    
-    /* 余白の調整（少し狭くして画面に収める） */
-    padding: 20px 24px;
+    /* 縦に引き伸ばす設定を排除 */
+    height: auto;
+    justify-content: flex-start;
   }
-
-  /* スマホでは隙間を詰める */
-  .top-display { margin-bottom: 32px !important; }
-  .dial-spacer { margin-bottom: 32px !important; }
-  .preset-bar  { margin-bottom: 24px !important; }
 }
-/* ===================================== */
+/* ======================================================== */
 
 
-/* 2. 情報バー */
+/* 1. 情報バー */
 .top-display {
   display: flex;
   justify-content: space-between;
   align-items: flex-end; 
   width: 100%;
-  margin-bottom: 48px; /* PCでの余白 */
+  
+  /* 元の余白デザインを維持 */
+  margin-bottom: 48px;
+  
   line-height: 1;
 }
 
@@ -95,12 +91,14 @@ body {
 #lensValueDisplay { color: #fff; }
 
 
-/* 3. ダイヤル部分 */
+/* 2. ダイヤル部分 */
 .dial-spacer {
   display: flex;
   align-items: flex-end; 
   width: 100%;
-  margin-bottom: 48px; /* PCでの余白 */
+  
+  /* 元の余白デザインを維持 */
+  margin-bottom: 48px;
 }
 
 .dial-container {
@@ -136,13 +134,15 @@ body {
 }
 
 
-/* 4. 焦点距離テンプレートカールセル */
+/* 3. 焦点距離テンプレートカールセル */
 .preset-bar {
   width: calc(100% + 48px);
   margin-left: -24px;
   overflow-x: scroll;
   white-space: nowrap;
   padding-bottom: 10px;
+  
+  /* 元の余白デザインを維持 */
   margin-bottom: 16px;
   
   scrollbar-width: none;
@@ -179,9 +179,11 @@ body {
 .preset-chip.active { background: #fff; color: #000; font-weight: bold; cursor: default; }
 
 
-/* 5. センサーサイズ選択ボタン */
+/* 4. センサーサイズ選択ボタン */
 .sensor-select { 
   display: flex; gap: 10px; width: 100%; 
+  /* 下の余白は不要（コンテナのpaddingがあるため） */
+  margin-bottom: 0;
 }
 
 .sensor-btn {
