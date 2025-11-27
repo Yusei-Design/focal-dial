@@ -25,12 +25,12 @@ body {
 .container {
   width: 100%;
   
-  /* スマホでも横幅いっぱいにならず、適切なサイズで止める */
+  /* PCではこの幅で止まる（カード型） */
   max-width: 360px; 
   
   background-color: #000;
   
-  /* 余白設定（PC/スマホ共通） */
+  /* 余白設定（PC向け） */
   padding: 48px 24px;
   box-sizing: border-box;
   
@@ -38,26 +38,28 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   
-  /* 内容量に合わせて高さを決める（引き伸ばさない） */
   height: auto; 
 }
 
 
-/* ========= スマホ調整（引き伸ばさず、中央配置を維持） ========= */
+/* ========= スマホ調整（幅いっぱい・全画面対応） ========= */
 @media screen and (max-width: 480px) {
   body {
-    /* スマホでアドレスバーなどが出ても中央を維持 */
     min-height: 100dvh; 
+    align-items: center; /* 縦方向は中央配置のまま */
   }
   
   .container {
-    /* 画面端に張り付かないように少し余裕を持たせるかもお好みですが、
-       今回は黒背景なので馴染みます */
+    /* ★ここを変更：幅制限を解除して画面いっぱいにする */
+    max-width: 100%;
     width: 100%;
     
-    /* 縦に引き伸ばす設定を排除 */
+    /* 横のパディングは少し残す（文字が画面端に張り付かないように）
+       不要なら padding: 60px 0; にしてください */
+    padding: 60px 24px; 
+    
     height: auto;
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 /* ======================================================== */
@@ -136,8 +138,10 @@ body {
 
 /* 3. 焦点距離テンプレートカールセル */
 .preset-bar {
+  /* スマホ対応：画面幅より少し広くして、端までスクロールできるようにする */
   width: calc(100% + 48px);
   margin-left: -24px;
+  
   overflow-x: scroll;
   white-space: nowrap;
   padding-bottom: 10px;
@@ -182,7 +186,6 @@ body {
 /* 4. センサーサイズ選択ボタン */
 .sensor-select { 
   display: flex; gap: 10px; width: 100%; 
-  /* 下の余白は不要（コンテナのpaddingがあるため） */
   margin-bottom: 0;
 }
 
